@@ -1,16 +1,40 @@
+import { useRouter } from "next/router";
 import { Menu } from "semantic-ui-react";
 
 export default function Gnb() {
-    const activeItem = "home";
-    
+    //const activeItem = "home";
+    const router = useRouter();
+
+    let activeItem;
+
+    if(router.pathname === "/") {
+      activeItem = "home";
+    } else if(router.pathname === "/about") {
+      activeItem = "about";
+    } 
+
+    function goLink(e, data) {
+      if(data.name === 'home') {
+        router.push('/');
+      } else if(data.name === 'about') {
+        router.push('/about'); // 내용물만 바뀜
+        // location.href = "/about"; //페이지가 새로고침되서 이동됨
+      }
+    }
+
     return (
         <Menu inverted>
           <Menu.Item
             name='home'
             active={activeItem === 'home'}
-            // onClick={this.handleItemClick}
+            onClick={goLink}
           />
           <Menu.Item
+            name='about'
+            active={activeItem === 'about'}
+            onClick={goLink}
+          />
+          {/* <Menu.Item
             name='messages'
             active={activeItem === 'messages'}
             // onClick={this.handleItemClick}
@@ -19,7 +43,7 @@ export default function Gnb() {
             name='friends'
             active={activeItem === 'friends'}
             // onClick={this.handleItemClick}
-          />
+          /> */}
         </Menu>
       )
 }
