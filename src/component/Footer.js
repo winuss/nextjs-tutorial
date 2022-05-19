@@ -1,3 +1,3 @@
 export default function Footer() {
-    return <div>Copy....</div>;
+    return <div>Footer....</div>;
 }
